@@ -2,8 +2,15 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const db = require("./config/keys").mongoURI;
-const users = require("./routes/users");
-const tweets = require("./routes/tweets");
+const users = require("./routes/api/users");
+const tweets = require("./routes/api/tweets");
+const User = require('./models/User');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+
+app.use(passport.initialize());
+
+require('./config/passport')(passport);
 
 
 mongoose
@@ -11,9 +18,22 @@ mongoose
     .then(() => console.log("connected to mongoDB~~") )
     .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-    res.send("Hello world~~~ root page");
-});
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+app.use(bodyParser.json());
+
+// app.get("/", (req, res) => {
+//     const user = new User({
+//         handle: "jimster",
+//         email: "jimster@gmail.com",
+//         password: "password1"
+//     })
+//     user.save();
+
+//     res.send("Hello world~~~ root page");
+// });
 
 app.use('/api/users', users);
 app.use('/api/tweets', tweets);
