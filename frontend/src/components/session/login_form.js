@@ -18,8 +18,8 @@ class LoginForm extends React.Component {
     }
 
     // Once the user has been authenticated, redirect to the Tweets page
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        //componentWillReceiveProps got "UNSAFE_" prefix to fix error messages;
+    componentWillReceiveProps(nextProps) {
+        //componentWillReceiveProps got "_" prefix to fix error messages;
         if (nextProps.currentUser === true) {
             this.props.history.push('/tweets');
         }
