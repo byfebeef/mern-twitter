@@ -1,8 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+
 import './index.css';
 import axios from 'axios';
 
+
+// src/index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 // We will create this component shortly
 import Root from './components/root';
@@ -22,7 +26,7 @@ import { logout } from './actions/session_actions';
 document.addEventListener('DOMContentLoaded', () => {
     let store;
     window.axios = axios;
-    
+
     // If a returning user has a session token stored in localStorage
     if (localStorage.jwtToken) {
 
